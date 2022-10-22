@@ -20,8 +20,12 @@ async def start(message):
 
 @bot.message_handler(func=lambda message: True)
 async def send_currency(message):
-    coin = parser.Coin(message.text.split()[0])
-    await bot.send_message(message.chat.id, f"Сейчас цена на {coin.coin} в валюте {message.text.split()[1]}: {coin.get_currency(message.text.split()[1])}")
+    coin = parser.Coin(message.text.split()[0].upper())
+    price = coin.get_currency(message.text.split()[1].upper())
+    if price == "Unknown coin or currency":
+        await bot.send_message(message.chat.id, "Вы ввели невалидную криптовалюту либо невалидную валюту сравнения.")
+    else:
+        await bot.send_message(message.chat.id, f"Сейчас цена на {coin.coin} в валюте {message.text.split()[1].upper()}: {price}")
 
 
 asyncio.run(bot.polling())
