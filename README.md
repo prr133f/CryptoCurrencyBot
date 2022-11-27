@@ -1,4 +1,3 @@
-# Writed by [prr133d](prr133f.t.me)
 ## Used packages:
 - requests
 - pytelegrambotapi
